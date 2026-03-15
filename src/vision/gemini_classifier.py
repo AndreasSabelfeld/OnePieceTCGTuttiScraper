@@ -15,15 +15,20 @@ MODEL_ID = "gemini-3.1-flash-lite-preview"
 BATCH_SIZE = 100  # For parallel mode
 
 PROMPT = """
-You are an expert Pokemon TCG appraiser. Look at this cropped image of a Pokemon card.
-Your goal is to extract the exact Card Name and the Set Number.
+You are an expert One Piece TCG appraiser. Look at this cropped image of a One Piece card.
+Your goal is to extract the exact Card Name (including specific art variant tags) and the Set Number.
 
 CRITICAL INSTRUCTIONS:
-1. Look closely at the BOTTOM LEFT or BOTTOM RIGHT corner for the Set Number (e.g., "004/165", "TG13/TG30", "112/105", or "SWSH250"). 
-2. The card might be in English, German, or Japanese. Output the name exactly as printed on the card.
-3. Ignore HP numbers, attack damage numbers, or illustrator names.
-4. If the image is just a piece of artwork, a table texture, or clearly NOT a full Pokemon card, return "Unknown" for both fields.
-5. If the card is too blurry or covered by glare to read the number, return "Unknown" for both fields.
+1. Look closely at the BOTTOM RIGHT corner for the Set Number (e.g., "OP14-119", "PRB02-006", "OP09-051"). Do not include the rarity letters (like C, UC, R, SR, SEC).
+2. Output the standard English name of the character/card (e.g., "Dracule Mihawk", "Boa Hancock", "You'll Frighten Me...").
+3. ART VARIANTS (CRITICAL): PriceCharting uses bracket tags for special art styles. You MUST append the correct tag to the card_name if it applies:
+   - If the card has comic book panels in the background, append "[Manga]".
+   - If it's a special full-art/borderless version of a standard card, append "[Alternate Art]".
+   - If it's a highly textured Special Print/re-release, append "[SP]" or "[SP Gold]".
+   - If it's just the standard, regular bordered version, do not add any brackets.
+   Example card_name outputs: "Dracule Mihawk [Manga]", "Boa Hancock [Alternate Art]", "Nami [Alternate Art]", "Roronoa Zoro [SP]".
+4. Ignore Cost numbers, Power/Counter numbers, or illustrator names.
+5. If the image is just a piece of artwork, table texture, or clearly NOT a full One Piece card, return "Unknown" for both fields.
 
 Respond STRICTLY in JSON format: {"card_name": "...", "set_number": "..."}
 """

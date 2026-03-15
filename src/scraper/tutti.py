@@ -19,7 +19,7 @@ def parse_price(price_str: str) -> float:
 
 async def run_hybrid_scraper(max_listings: int = None) -> None:
     """
-    Scrapes Tutti for Pokémon listings and saved them to the database.
+    Scrapes Tutti for One Piece TCG listings and saved them to the database.
     :param max_listings: specifies the maximum number of listings to scrape. Defaults to all listings possible.
     :return: None
     """
@@ -41,7 +41,7 @@ async def run_hybrid_scraper(max_listings: int = None) -> None:
             while has_more_pages:
                 print(f"Bot: Loading Page {page_num}...")
 
-                url = f"https://www.tutti.ch/de/q/suche/Ak65wb2tlbW9uIGthcnRlbsCUwMDAwA?sorting=newest&page={page_num}&query=pokemon+karten"
+                url = f"https://www.tutti.ch/de/q/suche/Ak61vbmUgcGllY2UgdGNnwJTAwMDA?sorting=newest&page={page_num}&query=one+piece+tcg"
 
                 await page.goto(url)
                 await page.wait_for_load_state("domcontentloaded")

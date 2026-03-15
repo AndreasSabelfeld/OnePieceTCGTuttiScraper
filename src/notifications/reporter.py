@@ -51,7 +51,7 @@ def generate_and_send_report():
         print(f"Bot: Found {len(profitable_listings)} profitable listings. Formatting email...")
 
         msg = MIMEMultipart('related')
-        msg['Subject'] = f"🚨 Pokemon Arbitrage Alert: {len(profitable_listings)} Profitable Listings Found!"
+        msg['Subject'] = f"🚨 One Piece TCG Arbitrage Alert: {len(profitable_listings)} Profitable Listings Found!"
         msg['From'] = sender_email
         msg['To'] = receiver_email
 
@@ -76,7 +76,7 @@ def generate_and_send_report():
             </style>
           </head>
           <body>
-            <h2>Your Daily Pokemon TCG Arbitrage Report</h2>
+            <h2>Your Daily One Piece TCG Arbitrage Report</h2>
         """
 
         embedded_images = []
@@ -176,7 +176,7 @@ def generate_and_send_report():
             listing.status = "REPORTED"
 
         db.commit()
-        print("Bot: ✅ Database fully synced. Pipeline complete!")
+        print("Bot: Database fully synced. Pipeline complete!")
 
     except Exception as e:
         print(f"Fatal error in email reporter: {e}")

@@ -42,15 +42,12 @@ def parse_usd_price(price_str: str) -> float:
 
 
 def format_search_query(name: str, set_info: str) -> str:
-    """Transforms Gemini's output into a PriceCharting query."""
+    """Transforms Gemini's output into a PriceCharting query for One Piece."""
     if not set_info or set_info == "Unknown":
         return name
 
-    numerator = set_info.split('/')[0].strip()
-    if numerator.isdigit():
-        numerator = str(int(numerator))
-
-    return f"{name} #{numerator}"
+    # Example output: "Dracule Mihawk [Manga] OP14-119"
+    return f"{name} {set_info}"
 
 
 async def fetch_card_price(browser, card_id: int, search_query: str, semaphore: asyncio.Semaphore,
